@@ -1,6 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
-export const LoginPage = () => {
-    return <h1>Login</h1>
+const useStyles = makeStyles(theme => ({
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+    }
+}));
+
+export const LoginPage = (props) => {
+    const classes = useStyles();
+    const [user, setUser] = useState(null);
+    const handleSubmit = () => {
+        localStorage.setItem('loggedIn', true);
+        localStorage.setItem('user', user);
+        props.history.push('/');
+    };
+    const handleInputChange = e => {
+        const {value} = e.target
+        setUser(value)
+    }
+
+    return (
+        <div>
+            <h1>Login</h1>
+            <form onSubmit={handleSubmit}>
+                <TextField
+                    id="standard-with-placeholder"
+                    label="User"
+                    placeholder="User"
+                    className={classes.textField}
+                    margin="normal"
+                    value={user}
+                    onChange={handleInputChange}
+                />
+            </form>
+        </div>
+    );
 };
 

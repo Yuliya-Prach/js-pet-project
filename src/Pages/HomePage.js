@@ -1,6 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import {ButtonPrimary} from "../Components/ButtonPrimary";
+import Button from "@material-ui/core/Button";
 
 const HomePage = (props) => {
     const handleClick = (path) => {
@@ -9,7 +9,9 @@ const HomePage = (props) => {
     return (
         <div class="text-center">
             <h1>Home</h1>
-            <ButtonPrimary onClick={()=> handleClick('/login')} text="Login" />
+            <Button variant="contained" color="primary" onClick={()=>handleClick('/login')}>
+                Login
+            </Button>
         </div>
     );
 };
