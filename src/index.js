@@ -5,12 +5,13 @@ import './index.css';
 import Home from './Pages/HomePage';
 import {LoginPage} from './Pages/LoginPage';
 import {AccountPage} from './Pages/AccountPage';
+import AuthorizationService from './Services/AuthorizationService';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
-        localStorage.getItem("user") === null
-        ? <Redirect to='/login' />
-        : <Component {...props} />
+        AuthorizationService.isAuthorized()
+        ? <Component {...props} />
+        : <Redirect to='/login' />
     )} />
 );
 

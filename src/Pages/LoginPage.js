@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
+import AuthorizationService from '../Services/AuthorizationService';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -15,8 +16,7 @@ export const LoginPage = (props) => {
     const classes = useStyles();
     const [user, setUser] = useState(null);
     const handleSubmit = () => {
-        localStorage.setItem('loggedIn', true);
-        localStorage.setItem('user', user);
+        AuthorizationService.authorize(user);
         props.history.push('/');
     };
     const handleInputChange = e => {
